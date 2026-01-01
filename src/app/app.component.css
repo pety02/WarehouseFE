@@ -1,0 +1,40 @@
+/* Container for form and buttons */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+  position: relative;
+}
+
+/* Toggle buttons container */
+.toggle-buttons {
+  display: flex;
+  width: 450px; /* same as the form width */
+  margin-bottom: -12px; /* overlap the form slightly */
+  z-index: 2;
+}
+
+/* Each button takes half width */
+.toggle-button {
+  flex: 1;
+  padding: 12px 0;
+  border-radius: 12px 12px 0 0; /* rounded top corners */
+  border: 1px solid #1976d2;
+  border-bottom: none; /* connect with form below */
+  background-color: white;
+  color: #1976d2;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #e3f2fd;
+}
+
+/* Active button styling */
+.toggle-button.active {
+  background: linear-gradient(90deg, #42a5f5, #1976d2);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}

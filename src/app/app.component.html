@@ -1,5 +1,26 @@
-<button mat-button (click)="showLogin = true">Login</button>
-<button mat-button (click)="showLogin = false">Register</button>
+<div class="form-container">
+  <!-- Toggle buttons -->
+  <div class="toggle-buttons">
+    <button
+      mat-button
+      class="toggle-button"
+      [ngClass]="{ active: showLogin }"
+      (click)="showLogin = true"
+    >
+      Login
+    </button>
 
-<app-login-form *ngIf="showLogin"></app-login-form>
-<app-registration-form *ngIf="!showLogin"></app-registration-form>
+    <button
+      mat-button
+      class="toggle-button"
+      [ngClass]="{ active: !showLogin }"
+      (click)="showLogin = false"
+    >
+      Register
+    </button>
+  </div>
+
+  <!-- Forms -->
+  <app-login-form *ngIf="showLogin"></app-login-form>
+  <app-registration-form *ngIf="!showLogin"></app-registration-form>
+</div>

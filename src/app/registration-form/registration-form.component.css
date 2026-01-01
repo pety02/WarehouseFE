@@ -1,0 +1,61 @@
+/* Center the card */
+.registration-form {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* Card styling */
+.registration-card {
+  width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Header with blue gradient */
+.card-header {
+  background: linear-gradient(90deg, #1976d2, #42a5f5); /* blue palette */
+  color: white;
+  padding: 16px 24px;
+  font-weight: 600;
+}
+
+/* Spacing between form fields */
+.form-field {
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+/* Full-width inputs */
+.full-width {
+  width: 100%;
+}
+
+/* Actions section */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 24px;
+  color: white;
+}
+
+/* Blue gradient register button */
+.register-button {
+  background: linear-gradient(90deg, #42a5f5, #1976d2);
+  color: white;
+  font-weight: 500;
+  min-width: 120px;
+  transition: all 0.3s ease;
+}
+
+.register-button:hover {
+  background: linear-gradient(90deg, #1976d2, #42a5f5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: focus border color for inputs */
+.mat-form-field.mat-focused .mat-form-field-outline {
+  color: #1976d2;
+  border-color: #1976d2;
+}
