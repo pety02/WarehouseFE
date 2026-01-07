@@ -5,20 +5,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
-import {EmployeeCreateRequestDTO, EmployeeResponseDTO, RegistrationService} from './registration-form.service';
-import {LoginFormComponent} from '../login-form/login-form.component';
+import {RegistrationService} from './registration-form.service';
+import {EmployeeCreateRequestDTO} from './models/employee-create-request-dto.model';
+import {EmployeeResponseDTO} from './models/employee-register-response-dto.model';
 
 @Component({
   selector: 'app-register-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    NgIf,
     MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
-    LoginFormComponent
   ],
   templateUrl: './registration-form.component.html',
   styleUrl: './registration-form.component.css',

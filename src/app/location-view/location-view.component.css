@@ -1,0 +1,22 @@
+.location-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.location-card {
+  margin-bottom: 20px;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+mat-table {
+  width: 100%;
+}
+
+mat-list-item {
+  padding: 5px 0;
+}

@@ -9,6 +9,7 @@ interface EmployeeCredentials {
 
 @Component({
   selector: 'app-employee-credentials-view',
+  standalone: true,
   templateUrl: './employee-credentials-view.component.html',
   styleUrls: ['./employee-credentials-view.component.css']
 })

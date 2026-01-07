@@ -11,6 +11,7 @@ interface EmployeeFull {
 
 @Component({
   selector: 'app-employee-full-view',
+  standalone: true,
   templateUrl: './employee-full-view.component.html',
   styleUrls: ['./employee-full-view.component.css']
 })

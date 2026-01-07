@@ -37,7 +37,7 @@ export class LoginFormComponent {
     if (this.loginForm.valid) {
       console.log(this.loginForm);
       this.loginService.login(this.loginForm.value).subscribe({
-        next: (res) => this.router.navigate([`/api/locations/${res.locationId}`]),
+        next: (res) => this.router.navigate(['/current-location', res.locationId]),
         error: (err) => console.error('Login failed: ', err)
       });
     } else {

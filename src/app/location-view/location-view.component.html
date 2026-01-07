@@ -1,1 +1,75 @@
-<p>location-view works!</p>
+<div class="location-container" *ngIf="location">
+  <mat-card class="location-card">
+    <mat-card-title>{{ location.name }}</mat-card-title>
+    <mat-card-subtitle>
+      Manager: {{ location.managerName }} {{ location.managerSurname }} ({{ location.managerEmail }})
+    </mat-card-subtitle>
+    <mat-card-content>
+      <p>Address: {{ location.address.street }}, {{ location.address.city }}, {{ location.address.country }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <section class="section">
+    <h3>Employees</h3>
+    <mat-table [dataSource]="employees" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{ employee.name }} {{ employee.surname }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{ employee.email }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
+        <mat-cell *matCellDef="let employee">{{ employee.role }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['name', 'email', 'role']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'email', 'role'];"></mat-row>
+    </mat-table>
+  </section>
+
+  <section class="section">
+    <h3>Items</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let item of items">
+        {{ item.name }} ({{ item.itemType }}) - Barcode: {{ item.barcodeValue }}
+      </mat-list-item>
+    </mat-list>
+  </section>
+
+  <section class="section">
+    <h3>Warehouse Zones</h3>
+    <mat-list>
+      <mat-list-item *ngFor="let zone of warehouseZones">
+        {{ zone.name }} ({{ zone.storageTypeName }})
+      </mat-list-item>
+    </mat-list>
+  </section>
+
+  <section class="section">
+    <h3>Stock Availabilities</h3>
+    <mat-table [dataSource]="stockAvailabilities" class="mat-elevation-z8">
+      <ng-container matColumnDef="item">
+        <mat-header-cell *matHeaderCellDef>Item</mat-header-cell>
+        <mat-cell *matCellDef="let stock">{{ stock.item }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="warehouseZone">
+        <mat-header-cell *matHeaderCellDef>Warehouse Zone</mat-header-cell>
+        <mat-cell *matCellDef="let stock">{{ stock.warehouseZone }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="piecesCount">
+        <mat-header-cell *matHeaderCellDef>Pieces</mat-header-cell>
+        <mat-cell *matCellDef="let stock">{{ stock.piecesCount }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['item', 'warehouseZone', 'piecesCount']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['item', 'warehouseZone', 'piecesCount']"></mat-row>
+    </mat-table>
+  </section>
+</div>

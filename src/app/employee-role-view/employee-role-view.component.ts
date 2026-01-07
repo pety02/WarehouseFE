@@ -9,6 +9,7 @@ interface EmployeeRole {
 
 @Component({
   selector: 'app-employee-role-view',
+  standalone: true,
   templateUrl: './employee-role-view.component.html',
   styleUrls: ['./employee-role-view.component.css']
 })

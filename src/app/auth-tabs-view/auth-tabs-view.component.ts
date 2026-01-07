@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import {LoginFormComponent} from "../login-form/login-form.component";
-import {NgClass, NgIf} from "@angular/common";
-import {RegisterFormComponent} from "../registration-form/registration-form.component";
-import {MatButton} from '@angular/material/button';
+import { LoginFormComponent } from '../login-form/login-form.component';
+import { RegisterFormComponent } from '../registration-form/registration-form.component';
+import { NgIf, NgClass } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-auth-tabs-view',
+  standalone: true,
   imports: [
     LoginFormComponent,
-    NgIf,
     RegisterFormComponent,
+    NgIf,
     NgClass,
-    MatButton
+    MatButtonModule  // fixed here
   ],
   templateUrl: './auth-tabs-view.component.html',
-  styleUrl: './auth-tabs-view.component.css'
+  styleUrls: ['./auth-tabs-view.component.css']  // fixed typo
 })
 export class AuthTabsViewComponent {
   showLogin = true;
