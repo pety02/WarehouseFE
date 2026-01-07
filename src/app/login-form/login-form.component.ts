@@ -6,6 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {LoginService} from './login-form.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -24,7 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 export class LoginFormComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
@@ -33,8 +35,11 @@ export class LoginFormComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Login data:', this.loginForm.value);
-      // Here you would call your auth service
+      console.log(this.loginForm);
+      this.loginService.login(this.loginForm.value).subscribe({
+        next: (res) => this.router.navigate([`/api/locations/${res.locationId}`]),
+        error: (err) => console.error('Login failed: ', err)
+      });
     } else {
       this.loginForm.markAllAsTouched();
     }

@@ -1,48 +1,67 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {NgIf} from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import {EmployeeCreateRequestDTO, EmployeeResponseDTO, RegistrationService} from './registration-form.service';
+import {LoginFormComponent} from '../login-form/login-form.component';
 
 @Component({
-  selector: 'app-registration-form',
+  selector: 'app-register-form',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatInputModule,
+    NgIf,
     MatButtonModule,
-    MatCardModule,
+    MatInputModule,
     MatFormFieldModule,
-    NgIf
+    MatCardModule,
+    LoginFormComponent
   ],
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.css']
+  styleUrl: './registration-form.component.css',
 })
-export class RegistrationFormComponent {
-  registrationForm: FormGroup;
+export class RegisterFormComponent {
+  registerForm: FormGroup;
+  loading = false;
+  error: string | null = null;
+  registered = false; // <- toggle to show login form after successful registration
 
-  constructor(private fb: FormBuilder) {
-    this.registrationForm = this.fb.group({
+  constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
+    this.registerForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      surname: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
       phoneNumber: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-    }, { validators: this.passwordMatchValidator });
-  }
-
-  passwordMatchValidator(group: FormGroup) {
-    const password = group.get('password')?.value;
-    const confirm = group.get('confirmPassword')?.value;
-    return password === confirm ? null : { mismatch: true };
+      uidNo: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]]
+    });
   }
 
   onSubmit() {
-    if (this.registrationForm.valid) {
-      console.log(this.registrationForm.value);
-    } else {
-      this.registrationForm.markAllAsTouched();
+    if (!this.registerForm.valid) {
+      this.registerForm.markAllAsTouched();
+      return;
     }
+
+    this.loading = true;
+    const employee: EmployeeCreateRequestDTO = this.registerForm.value;
+
+    this.registrationService.registerEmployee(employee).subscribe({
+      next: (res: EmployeeResponseDTO) => {
+        console.log('Employee registered:', res);
+        this.registerForm.reset(); // <- reset form fields
+        this.registered = true; // <- show login form
+        this.loading = false;
+      },
+      error: (err: any) => {
+        console.error(err);
+        this.error = err?.error?.message || 'Registration failed';
+        this.loading = false;
+      }
+    });
   }
 }
