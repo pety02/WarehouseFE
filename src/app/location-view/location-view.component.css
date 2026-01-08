@@ -37,6 +37,32 @@
   gap: 10px;
 }
 
+/* User info dropdown */
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 4px;
+  font-weight: 500;
+  color: white;
+}
+
+.user-info mat-icon {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+/* Optional hover effect */
+.user-info:hover {
+  opacity: 0.85;
+}
+
+/* mat-menu icons */
+mat-menu mat-icon {
+  margin-right: 8px;
+  color: #1976d2;
+}
+
 /* ====================== */
 /* CONTENT CONTAINERS      */
 /* ====================== */
