@@ -1,17 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global tooltip styles in styles.css */
 .cdk-overlay-container .mat-tooltip {
-  background: linear-gradient(135deg, #1976d2, #42a5f5) !important; /* bluish gradient */
+  background: linear-gradient(135deg, #1976d2, #42a5f5) !important;
   color: white !important;
   font-size: 13px !important;
   padding: 8px 12px !important;
   border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
-  white-space: pre-line !important; /* allow newline characters */
+  white-space: pre-line !important;
   font-weight: 500 !important;
-  opacity: 1 !important; /* fully opaque */
+  opacity: 1 !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+
+  /* Make the tooltip arrow match the gradient */
+  --mat-tooltip-background: linear-gradient(135deg, #1976d2, #42a5f5);
 }
 
-.cdk-overlay-container .mat-tooltip::after {
-  border-top-color: #1976d2 !important;
+/* Optional: smooth scaling on hover (polish) */
+.cdk-overlay-container .mat-tooltip-show {
+  transform: scale(1.05);
+}
+
+.cdk-overlay-container .mat-tooltip {
+  transform: scale(0.95);
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.cdk-overlay-container .mat-tooltip-show {
+  transform: scale(1);
 }

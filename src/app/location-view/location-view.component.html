@@ -3,8 +3,8 @@
   <span class="app-title">Warehouse Manager</span>
   <span class="spacer"></span>
   <div class="user-info">
-    <span class="user-name">John Doe</span>
-    <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
+    <span class="user-name"> {{ authService.getUser()?.fullName }} </span>
+    <button mat-stroked-button color="accent" (click)="authService.logout()">Logout</button>
   </div>
 </mat-toolbar>
 
