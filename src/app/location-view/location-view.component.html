@@ -1,75 +1,72 @@
+<!-- TOP APP BAR -->
+<mat-toolbar class="app-toolbar">
+  <span class="app-title">Warehouse Manager</span>
+  <span class="spacer"></span>
+  <div class="user-info">
+    <span class="user-name">John Doe</span>
+    <button mat-stroked-button color="accent" (click)="logout()">Logout</button>
+  </div>
+</mat-toolbar>
+
+<!-- MAIN CONTENT -->
 <div class="location-container" *ngIf="location">
-  <mat-card class="location-card">
-    <mat-card-title>{{ location.name }}</mat-card-title>
-    <mat-card-subtitle>
-      Manager: {{ location.managerName }} {{ location.managerSurname }} ({{ location.managerEmail }})
-    </mat-card-subtitle>
-    <mat-card-content>
-      <p>Address: {{ location.address.street }}, {{ location.address.city }}, {{ location.address.country }}</p>
-    </mat-card-content>
-  </mat-card>
 
-  <section class="section">
-    <h3>Employees</h3>
-    <mat-table [dataSource]="employees" class="mat-elevation-z8">
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let employee">{{ employee.name }} {{ employee.surname }}</mat-cell>
-      </ng-container>
+  <!-- LOCATION HEADER CARD -->
+  <div class="stacked-cards">
+    <mat-card class="example-card" appearance="outlined">
+      <mat-card-header>
+        <img mat-card-avatar src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg"
+             alt="Warehouse image"/>
+        <mat-card-title>{{ location.name }}</mat-card-title>
+        <mat-card-subtitle>
+          Manager: {{ location.managerName }} {{ location.managerSurname }}
+          <span class="manager-email">({{ location.managerEmail }})</span>
+        </mat-card-subtitle>
+      </mat-card-header>
 
-      <ng-container matColumnDef="email">
-        <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
-        <mat-cell *matCellDef="let employee">{{ employee.email }}</mat-cell>
-      </ng-container>
+      <mat-card-content class="address">
+        {{ location.address.street }} {{ location.address.no }},
+        {{ location.address.city }} {{ location.address.zip }},
+        {{ location.address.country }}
+      </mat-card-content>
+    </mat-card>
 
-      <ng-container matColumnDef="role">
-        <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
-        <mat-cell *matCellDef="let employee">{{ employee.role }}</mat-cell>
-      </ng-container>
+    <!-- ZONES -->
+    <div class="grid-two">
+      <mat-card class="section-card">
+        <mat-grid-list cols="2" rowHeight="2:1">
+          <mat-grid-tile *ngFor="let zone of warehouseZones">
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div>{{ zone.name }}</div>
+              <mat-chip class="secondary">{{ zone.storageTypeName }}</mat-chip>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card>
+    </div>
+  </div>
 
-      <mat-header-row *matHeaderRowDef="['name', 'email', 'role']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['name', 'email', 'role'];"></mat-row>
-    </mat-table>
-  </section>
+  <!-- EMPLOYEES -->
+  <div class="employees-chips">
+    <mat-chip
+      *ngFor="let e of employees"
+      matTooltip="Role: {{ e.role }}&#10;Email: {{ e.email }}"
+      matTooltipPosition="above"
+      color="primary"
+      selected>
+      {{ e.name }} {{ e.surname }}
+    </mat-chip>
+  </div>
 
-  <section class="section">
-    <h3>Items</h3>
-    <mat-list>
-      <mat-list-item *ngFor="let item of items">
-        {{ item.name }} ({{ item.itemType }}) - Barcode: {{ item.barcodeValue }}
-      </mat-list-item>
-    </mat-list>
-  </section>
+  <!-- STOCK -->
+  <mat-grid-list cols="3" rowHeight="180px" gutterSize="16px">
+    <mat-grid-tile *ngFor="let s of stockAvailabilities">
+      <mat-card class="stock-card">
+        <div class="stock-item">{{ s.item }}</div>
+        <mat-chip class="secondary">{{ s.warehouseZone }}</mat-chip>
+        <div class="stock-count">{{ s.piecesCount }} pcs</div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-  <section class="section">
-    <h3>Warehouse Zones</h3>
-    <mat-list>
-      <mat-list-item *ngFor="let zone of warehouseZones">
-        {{ zone.name }} ({{ zone.storageTypeName }})
-      </mat-list-item>
-    </mat-list>
-  </section>
-
-  <section class="section">
-    <h3>Stock Availabilities</h3>
-    <mat-table [dataSource]="stockAvailabilities" class="mat-elevation-z8">
-      <ng-container matColumnDef="item">
-        <mat-header-cell *matHeaderCellDef>Item</mat-header-cell>
-        <mat-cell *matCellDef="let stock">{{ stock.item }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="warehouseZone">
-        <mat-header-cell *matHeaderCellDef>Warehouse Zone</mat-header-cell>
-        <mat-cell *matCellDef="let stock">{{ stock.warehouseZone }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="piecesCount">
-        <mat-header-cell *matHeaderCellDef>Pieces</mat-header-cell>
-        <mat-cell *matCellDef="let stock">{{ stock.piecesCount }}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="['item', 'warehouseZone', 'piecesCount']"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: ['item', 'warehouseZone', 'piecesCount']"></mat-row>
-    </mat-table>
-  </section>
 </div>

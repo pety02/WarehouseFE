@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Employee} from './models/employee.model';
 import {Item} from './models/item.model';
 import {WarehouseZone} from './models/warehouse-zone.model';
 import {StockAvailability} from './models/stock-availability.model';
-import {MatCardContent, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
-import {Location} from './models/location.model'
 import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
-  MatTable
-} from '@angular/material/table';
-import {MatList, MatListItem} from '@angular/material/list';
-import {NgForOf, NgIf} from '@angular/common';
+  MatCard, MatCardAvatar,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle
+} from '@angular/material/card';
+import {Location} from './models/location.model'
+import {NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {LocationService} from './location.service';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridList, MatGridTile} from '@angular/material/grid-list';
+import {MatChip} from '@angular/material/chips';
+import {MatTooltip} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-location-view',
@@ -28,20 +30,18 @@ import {LocationService} from './location.service';
     MatCardTitle,
     MatCardSubtitle,
     MatCardContent,
-    MatTable,
-    MatHeaderCell,
-    MatColumnDef,
-    MatCell,
-    MatHeaderCellDef,
-    MatCellDef,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow,
-    MatRowDef,
-    MatList,
-    MatListItem,
     NgForOf,
-    NgIf
+    NgIf,
+    MatCard,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardHeader,
+    MatCardAvatar,
+    MatGridList,
+    MatGridTile,
+    MatChip,
+    MatTooltip
   ],
 })
 export class LocationViewComponent implements OnInit {
@@ -52,9 +52,20 @@ export class LocationViewComponent implements OnInit {
   warehouseZones: WarehouseZone[] = [];
   stockAvailabilities: StockAvailability[] = [];
 
+  employeeColumns = ['name', 'email', 'role'];
+  stockColumns = ['item', 'warehouseZone', 'piecesCount'];
+
+  logout() {
+    // clear token / session
+    localStorage.clear();
+    // navigate to login
+    this.router.navigate(['/']).then(() => true);
+  }
+
   constructor(
     private route: ActivatedRoute,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
