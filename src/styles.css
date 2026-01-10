@@ -1,18 +1,22 @@
+:root{
+  font-family: "Roboto", sans-serif;
+}
+
 /* Global tooltip styles in styles.css */
 .cdk-overlay-container .mat-tooltip {
-  background: linear-gradient(135deg, #1976d2, #42a5f5) !important;
-  color: white !important;
+  /*background: linear-gradient(135deg, #1976d2, #42a5f5) !important;*/
+  /*color: white !important;*/
   font-size: 13px !important;
   padding: 8px 12px !important;
   border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;
+  /*box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important;*/
   white-space: pre-line !important;
   font-weight: 500 !important;
   opacity: 1 !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
 
   /* Make the tooltip arrow match the gradient */
-  --mat-tooltip-background: linear-gradient(135deg, #1976d2, #42a5f5);
+  /*--mat-tooltip-background: linear-gradient(135deg, #1976d2, #42a5f5);*/
 }
 
 /* Optional: smooth scaling on hover (polish) */

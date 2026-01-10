@@ -32,7 +32,7 @@
   <!-- User dropdown -->
   <div class="user-info" [matMenuTriggerFor]="userMenu">
     <span class="user-name">
-      {{ authService.getUser()?.fullName }}
+      {{ this.user ?? '' }}
     </span>
   </div>
 
@@ -40,12 +40,12 @@
     <button mat-menu-item>
       My Profile
     </button>
-
+    <mat-divider></mat-divider>
     <!-- *ngIf="authService.getUser()?.isAdmin" -->
     <button mat-menu-item>
       Change Location
     </button>
-
+    <mat-divider></mat-divider>
     <button mat-menu-item (click)="authService.logout()">
       Logout
     </button>
@@ -73,6 +73,10 @@
         {{ location.address.city }} {{ location.address.zip }},
         {{ location.address.country }}
       </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-flat-button (click)="predictLowStocks()">Predict Stock Availabilities</button>
+      </mat-card-actions>
     </mat-card>
 
     <!-- ZONES -->
@@ -96,7 +100,6 @@
       *ngFor="let e of employees"
       matTooltip="Role: {{ e.role }}&#10;Email: {{ e.email }}"
       matTooltipPosition="above"
-      color="primary"
       selected>
       {{ e.name }} {{ e.surname }}
     </mat-chip>

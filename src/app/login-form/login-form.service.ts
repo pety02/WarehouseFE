@@ -15,22 +15,31 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials: EmployeeLoginRequestDTO): Observable<EmployeeLoginResponseDTO> {
-    return this.http.post<EmployeeLoginResponseDTO>(`${this.baseUrl}/login`, credentials)
+    return this.http
+      .post<EmployeeLoginResponseDTO>(`${this.baseUrl}/login`, credentials)
       .pipe(
         tap(response => {
-          // Log or store the response
           this.loggedInUser = response;
-          localStorage.setItem("userId", this.loggedInUser.id);
+          localStorage.setItem('user', JSON.stringify(response));
         })
       );
   }
 
   getUser(): EmployeeLoginResponseDTO | null {
+    if (this.loggedInUser) {
+      return this.loggedInUser;
+    }
+
+    const storedUser = localStorage.getItem('user');
+    if (!storedUser) {
+      return null;
+    }
+
+    this.loggedInUser = JSON.parse(storedUser);
     return this.loggedInUser;
   }
 
   logout(): void {
-    this.loggedInUser = null;
     localStorage.clear();
     this.router.navigate(['/']);
   }

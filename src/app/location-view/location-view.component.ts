@@ -5,7 +5,7 @@ import {Item} from './models/item.model';
 import {WarehouseZone} from './models/warehouse-zone.model';
 import {StockAvailability} from './models/stock-availability.model';
 import {
-  MatCard, MatCardAvatar,
+  MatCard, MatCardActions, MatCardAvatar,
   MatCardContent,
   MatCardHeader,
   MatCardSubtitle,
@@ -16,14 +16,15 @@ import {NgForOf, NgIf} from '@angular/common';
 import {LocationService} from './location.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import {MatGridList, MatGridTile} from '@angular/material/grid-list';
 import {MatChip} from '@angular/material/chips';
 import {MatTooltip, TooltipPosition} from '@angular/material/tooltip';
 import {AuthService} from '../login-form/login-form.service';
-import {FormControl} from '@angular/forms';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
 import {MatDivider} from '@angular/material/divider';
+import {LowStockAlertService} from './LowStockAlertService.service';
+import {LowStockAlertDTO, StockAvailabilityDTO} from './models/LowStockAlertDTO.model';
 
 @Component({
   selector: 'app-location-view',
@@ -39,7 +40,6 @@ import {MatDivider} from '@angular/material/divider';
     MatCard,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule,
     MatCardHeader,
     MatCardAvatar,
     MatGridList,
@@ -50,6 +50,9 @@ import {MatDivider} from '@angular/material/divider';
     RouterLink,
     MatMenuItem,
     MatMenuTrigger,
+    MatDivider,
+    MatCardActions,
+    MatButtonModule,
   ],
 })
 export class LocationViewComponent implements OnInit {
@@ -60,11 +63,14 @@ export class LocationViewComponent implements OnInit {
   warehouseZones: WarehouseZone[] = [];
   stockAvailabilities: StockAvailability[] = [];
   protected allLocations: (NgIterable<Location>) | undefined | null;
+  user: string | undefined = "";
+  lowStockAlert: LowStockAlertDTO | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private locationService: LocationService,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected lowStockAlertService: LowStockAlertService
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +78,7 @@ export class LocationViewComponent implements OnInit {
     this.fetchLocationDetails();
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id); // now you can call backend with this id
+    this.user = this.authService.getUser()?.fullName ?? '';
   }
 
   fetchLocationDetails() {
@@ -84,5 +91,9 @@ export class LocationViewComponent implements OnInit {
 
   protected changeLocation(loc: Location) {
 
+  }
+
+  protected predictLowStocks() {
+    this.lowStockAlertService.predict().subscribe(alert => this.lowStockAlert = alert);
   }
 }
