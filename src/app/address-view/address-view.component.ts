@@ -1,10 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatCell, MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow, MatHeaderRowDef,
+  MatRow, MatRowDef,
+  MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
 
 @Component({
   selector: 'app-address-view',
   standalone: true,
   templateUrl: './address-view.component.html',
+  imports: [
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatRow,
+    MatHeaderCellDef,
+    MatCell,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef
+  ],
   styleUrls: ['./address-view.component.css']
 })
 export class AddressViewComponent implements OnInit {

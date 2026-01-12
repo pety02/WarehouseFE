@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatCell, MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
 
 interface EmployeeRole {
   id: string;
@@ -11,6 +18,18 @@ interface EmployeeRole {
   selector: 'app-employee-role-view',
   standalone: true,
   templateUrl: './employee-role-view.component.html',
+  imports: [
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatCell,
+    MatCellDef,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef
+  ],
   styleUrls: ['./employee-role-view.component.css']
 })
 export class EmployeeRoleViewComponent implements OnInit {

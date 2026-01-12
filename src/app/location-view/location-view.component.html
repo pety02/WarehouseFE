@@ -84,7 +84,7 @@
       <mat-card class="section-card">
         <mat-grid-list cols="2" rowHeight="2:1">
           <mat-grid-tile *ngFor="let zone of warehouseZones">
-            <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div class="warehouse-zone-wrapper">
               <div>{{ zone.name }}</div>
               <mat-chip class="secondary">{{ zone.storageTypeName }}</mat-chip>
             </div>

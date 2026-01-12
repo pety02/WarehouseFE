@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatCell, MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
+  MatTable,
+  MatTableDataSource
+} from '@angular/material/table';
 
 interface EmployeeFull {
   employeeId: string;
@@ -13,6 +20,18 @@ interface EmployeeFull {
   selector: 'app-employee-full-view',
   standalone: true,
   templateUrl: './employee-full-view.component.html',
+  imports: [
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef
+  ],
   styleUrls: ['./employee-full-view.component.css']
 })
 export class EmployeeFullViewComponent implements OnInit {
