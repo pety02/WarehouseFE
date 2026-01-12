@@ -7,11 +7,16 @@ import {LowStockAlertDTO} from './models/LowStockAlertDTO.model';
   providedIn: 'root'
 })
 export class LowStockAlertService {
-  private baseUrl = '/api/locations';
+  private baseUrl = '/api/low_stock_alerts';
 
   constructor(private http: HttpClient) {}
 
   predict(): Observable<LowStockAlertDTO> {
-    return this.http.post<LowStockAlertDTO>(`${this.baseUrl}`, null);
+    return this.http.post<LowStockAlertDTO>(
+      '/api/low_stock_alerts',
+      {},
+      { withCredentials: true }
+    );
   }
+
 }

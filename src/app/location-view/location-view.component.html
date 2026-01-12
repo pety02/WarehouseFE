@@ -1,119 +1,20 @@
-<!-- TOP APP BAR -->
 <mat-toolbar class="app-toolbar">
   <span class="app-title">Warehouse Manager</span>
 
   <span class="spacer"></span>
-
-  <!-- Navigation buttons -->
-  <div class="nav-buttons">
-    <button mat-button routerLink="/overview">Overview</button>
-    <button mat-button routerLink="/stocks">Item Stocks</button>
-    <button mat-button routerLink="/locations-map">Locations Map</button>
-    <button mat-button routerLink="/event-log">Event Log</button>
-    <button mat-button routerLink="/internal-transfers">Internal Transfers</button>
-
-    <!-- Admin-only views -->
-    <!-- *ngIf="authService.getUser()?.isAdmin" -->
-    <ng-container>
-      <button mat-button routerLink="/employees">Employees Dashboard</button>
-      <button mat-button routerLink="/stock-alerts">Stock Alerts</button>
-
-      <!-- Change location dropdown -->
-      <mat-menu #locationMenu="matMenu">
-        <button mat-menu-item *ngFor="let loc of allLocations" (click)="changeLocation(loc)">
-          {{ loc.name }}
-        </button>
-      </mat-menu>
-    </ng-container>
-  </div>
-
+  <app-navigation-bar></app-navigation-bar>
   <span class="spacer"></span>
 
-  <!-- User dropdown -->
-  <div class="user-info" [matMenuTriggerFor]="userMenu">
-    <span class="user-name">
-      {{ this.user ?? '' }}
-    </span>
-  </div>
-
-  <mat-menu #userMenu="matMenu" xPosition="before" yPosition="below">
-    <button mat-menu-item>
-      My Profile
-    </button>
-    <mat-divider></mat-divider>
-    <!-- *ngIf="authService.getUser()?.isAdmin" -->
-    <button mat-menu-item>
-      Change Location
-    </button>
-    <mat-divider></mat-divider>
-    <button mat-menu-item (click)="authService.logout()">
-      Logout
-    </button>
-  </mat-menu>
+  <app-user-drop-down-button></app-user-drop-down-button>
 </mat-toolbar>
 
-<!-- MAIN CONTENT -->
 <div class="location-container" *ngIf="location">
 
-  <!-- LOCATION HEADER CARD -->
   <div class="stacked-cards">
-    <mat-card class="example-card" appearance="outlined">
-      <mat-card-header>
-        <img mat-card-avatar src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg"
-             alt="Warehouse image"/>
-        <mat-card-title>{{ location.name }}</mat-card-title>
-        <mat-card-subtitle>
-          Manager: {{ location.managerName }} {{ location.managerSurname }}
-          <span class="manager-email">({{ location.managerEmail }})</span>
-        </mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-card-content class="address">
-        {{ location.address.street }} {{ location.address.no }},
-        {{ location.address.city }} {{ location.address.zip }},
-        {{ location.address.country }}
-      </mat-card-content>
-
-      <mat-card-actions>
-        <button mat-flat-button (click)="predictLowStocks()">Predict Stock Availabilities</button>
-      </mat-card-actions>
-    </mat-card>
-
-    <!-- ZONES -->
-    <div class="grid-two">
-      <mat-card class="section-card">
-        <mat-grid-list cols="2" rowHeight="2:1">
-          <mat-grid-tile *ngFor="let zone of warehouseZones">
-            <div class="warehouse-zone-wrapper">
-              <div>{{ zone.name }}</div>
-              <mat-chip class="secondary">{{ zone.storageTypeName }}</mat-chip>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </mat-card>
-    </div>
+    <app-location-card [location]="location"></app-location-card>
+    <app-warehouse-zones-card [warehouseZones] = "warehouseZones"></app-warehouse-zones-card>
+    <app-employee-chips [employees] = "employees"></app-employee-chips>
+    <app-stock-cards [stockAvailabilities]="stockAvailabilities"></app-stock-cards>
   </div>
-
-  <!-- EMPLOYEES -->
-  <div class="employees-chips">
-    <mat-chip
-      *ngFor="let e of employees"
-      matTooltip="Role: {{ e.role }}&#10;Email: {{ e.email }}"
-      matTooltipPosition="above"
-      selected>
-      {{ e.name }} {{ e.surname }}
-    </mat-chip>
-  </div>
-
-  <!-- STOCK -->
-  <mat-grid-list cols="3" rowHeight="180px" gutterSize="16px">
-    <mat-grid-tile *ngFor="let s of stockAvailabilities">
-      <mat-card class="stock-card">
-        <div class="stock-item">{{ s.item }}</div>
-        <mat-chip class="secondary">{{ s.warehouseZone }}</mat-chip>
-        <div class="stock-count">{{ s.piecesCount }} pcs</div>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
 
 </div>

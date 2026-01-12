@@ -1,8 +1,3 @@
-
-
-/* ====================== */
-/* TOOLBAR / NAVIGATION   */
-/* ====================== */
 .app-toolbar {
   position: sticky;
   top: 0;
@@ -21,48 +16,15 @@
   flex: 1;
 }
 
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.user-name {
-  font-weight: 500;
-}
-
 .stacked-cards {
   display: flex;
   gap: 10px;
 }
 
-/* User info dropdown */
-.user-info {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  gap: 4px;
-  font-weight: 500;
-}
-
-.user-info mat-icon {
-  font-size: 20px;
-  vertical-align: middle;
-}
-
-/* Optional hover effect */
-.user-info:hover {
-  opacity: 0.85;
-}
-
-/* mat-menu icons */
 mat-menu mat-icon {
   margin-right: 8px;
 }
 
-/* ====================== */
-/* CONTENT CONTAINERS      */
-/* ====================== */
 .location-container {
   padding: 24px;
   display: flex;
@@ -70,15 +32,6 @@ mat-menu mat-icon {
   gap: 32px;
 }
 
-/* Cards */
-.example-card,
-.section-card {
-  width: 400px;
-  padding: 16px;
-  border-radius: 12px;
-}
-
-/* Card Header */
 mat-card-title {
   font-size: 20px;
   font-weight: 600;
@@ -87,135 +40,4 @@ mat-card-title {
 mat-card-subtitle {
   font-size: 14px;
   margin-top: 4px;
-}
-
-.address {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-}
-
-/* Grid Layouts */
-.grid-two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-@media (max-width: 900px) {
-  .grid-two {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Warehouse Zones Grid */
-.warehouse-container .zones-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-}
-
-/* Chips */
-.employees-chips mat-chip {
-  margin: 4px;
-  cursor: pointer;
-  font-size: 12px;
-}
-
-/* Stock grid */
-.stock-grid {
-  margin-top: 16px;
-}
-
-.stock-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  width: 100%;
-  border-radius: 12px;
-  text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
-}
-
-.stock-card:hover {
-  transform: translateY(-4px);
-}
-
-/* Stock item name */
-.stock-item {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-/* Warehouse zone chip */
-.stock-card mat-chip.secondary {
-  font-size: 12px;
-  margin-bottom: 8px;
-}
-
-/* Pieces count */
-.stock-count {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* Responsive grid */
-@media (max-width: 900px) {
-  mat-grid-list {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* Secondary small text */
-.secondary {
-  font-size: 12px;
-}
-
-/* Grid Tiles */
-mat-grid-list {
-  width: 100%;
-}
-
-mat-grid-tile {
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 6px;
-  font-weight: 500;
-  transition: transform 0.2s;
-}
-
-mat-grid-tile:hover {
-  transform: translateY(-2px);
-}
-
-/* ====================== */
-/* RESPONSIVE             */
-/* ====================== */
-@media (max-width: 900px) {
-  .grid-two {
-    grid-template-columns: 1fr;
-  }
-
-  .warehouse-container .zones-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .example-card,
-  .section-card {
-    margin-bottom: 16px;
-  }
-}
-
-.warehouse-zone-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }

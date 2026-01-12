@@ -3,4 +3,5 @@ export interface EmployeeLoginResponseDTO {
   fullName: string;
   email: string;
   locationId: string;
+  isAdmin: boolean;
 }
