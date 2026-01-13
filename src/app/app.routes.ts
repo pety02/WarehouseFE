@@ -1,10 +1,12 @@
 import {Routes} from '@angular/router';
 import {AuthTabsViewComponent} from './auth-tabs-view/auth-tabs-view.component';
 import {LocationViewComponent} from './location-view/location-view.component';
+import {LoginFormComponent} from './login-form/login-form.component';
 
 export const routes: Routes = [
   { path: '', component: AuthTabsViewComponent},
-  { path: 'current-location/:id', component: LocationViewComponent }
+  { path: 'login', component: AuthTabsViewComponent },
+  { path: 'current-location/:id', component: LocationViewComponent },
 ];
 
 /*
