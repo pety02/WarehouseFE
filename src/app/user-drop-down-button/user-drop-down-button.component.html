@@ -1,10 +1,12 @@
-<div class="user-info" [matMenuTriggerFor]="userMenu">
+<!-- User info button -->
+<button mat-button [matMenuTriggerFor]="userMenu" class="user-info">
   <span class="user-name">
     {{ user?.fullName ?? '' }}
   </span>
-</div>
+</button>
 
-<mat-menu #userMenu="matMenu">
+<!-- User dropdown menu -->
+<mat-menu #userMenu="matMenu" class="user-drop-down-menu-content">
   <button mat-menu-item>
     My Profile
   </button>

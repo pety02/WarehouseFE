@@ -1,27 +1,19 @@
 .user-info {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 500;
+}
+
+.user-drop-down-menu-content {
+  min-width: 180px;
 }
 
 .user-name {
   font-weight: 500;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  gap: 4px;
-  font-weight: 500;
-}
-
-.user-info mat-icon {
-  font-size: 20px;
-  vertical-align: middle;
-}
-
-/* Optional hover effect */
-.user-info:hover {
-  opacity: 0.85;
+  color: #c2185b;
 }

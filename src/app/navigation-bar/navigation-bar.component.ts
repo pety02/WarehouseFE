@@ -8,7 +8,6 @@ import {AuthService} from '../login-form/login-form.service';
 import {UserDropDownButtonComponent} from '../user-drop-down-button/user-drop-down-button.component';
 import {filter} from 'rxjs';
 import {MatTooltip} from '@angular/material/tooltip';
-import {MatChip} from "@angular/material/chips";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -22,7 +21,6 @@ import {MatChip} from "@angular/material/chips";
     NgIf,
     UserDropDownButtonComponent,
     NgClass,
-    MatChip,
     MatTooltip,
   ],
   templateUrl: './navigation-bar.component.html',
@@ -51,8 +49,15 @@ export class NavigationBarComponent implements OnInit {
   }
 
   isOverviewActive(): boolean {
-    return this.currentUrl.startsWith('/current-location') || this.currentUrl === '/login';
+    return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId'));
   }
 
   // TODO: do the same for other navigation-buttons and their paths
+  isItemStocksActive() {
+    return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId') + "/item-stocks");
+  }
+
+  isInternalTransfersActive() {
+    return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId') + "/internal-transfers");
+  }
 }
