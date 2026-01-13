@@ -12,10 +12,17 @@ export class LowStockAlertService {
   constructor(private http: HttpClient) {}
 
   predict(): Observable<LowStockAlertDTO> {
+    const locationId = localStorage.getItem('locationId');
+
     return this.http.post<LowStockAlertDTO>(
       '/api/low_stock_alerts',
-      {},
-      { withCredentials: true }
+      { locationId: locationId },
+      {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   }
 

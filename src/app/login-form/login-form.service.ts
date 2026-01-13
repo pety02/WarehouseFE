@@ -10,7 +10,8 @@ import { EmployeeLoginResponseDTO } from './models/employee-login-response-dto.m
 })
 export class AuthService {
   private readonly baseUrl = '/api/employees';
-  private readonly USER_KEY = 'user';
+  private readonly USER_KEY: string = 'user';
+  private readonly LOCATION_ID_KEY: string = "locationId";
 
   private loggedInUser: EmployeeLoginResponseDTO | null = null;
 
@@ -24,6 +25,7 @@ export class AuthService {
     ).pipe(
       tap(response => {
         this.loggedInUser = response;
+        localStorage.setItem(this.LOCATION_ID_KEY, response.locationId);
         localStorage.setItem(this.USER_KEY, JSON.stringify(response));
       }),
       catchError(err => {

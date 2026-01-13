@@ -4,12 +4,11 @@ export interface StockAvailabilityDTO {
   updatedBy: string;
   createdAt: string;
   updatedAt: string;
-  item: string;           // name of the item
-  warehouseZone: string;  // name of the zone
+  item: string;
+  warehouseZone: string;
 }
 
 export interface LowStockAlertDTO {
-  id: string;
   alertDate: string;
   message: string;
   actualCount: number;
@@ -20,5 +19,5 @@ export interface LowStockAlertDTO {
   createdAt: string;
   updatedAt: string;
   stockAvailability: StockAvailabilityDTO;
-  employees: string[];    // list of employee names or ids
+  employees: string[];
 }
