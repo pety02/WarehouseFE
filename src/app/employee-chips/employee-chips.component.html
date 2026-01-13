@@ -1,0 +1,9 @@
+<div class="employees-chips">
+  <mat-chip
+    *ngFor="let e of employees"
+    matTooltip="Role: {{ e.role }}&#10;Email: {{ e.email }}"
+    matTooltipPosition="above"
+    selected>
+    {{ e.name }} {{ e.surname }}
+  </mat-chip>
+</div>

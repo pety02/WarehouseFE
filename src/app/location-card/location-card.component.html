@@ -1,0 +1,35 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <img mat-card-avatar src="https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg"
+         alt="Warehouse image"/>
+    <mat-card-title>{{ location.name }}</mat-card-title>
+    <mat-card-subtitle>
+      Manager: {{ location.managerName }} {{ location.managerSurname }}
+      <span class="manager-email">({{ location.managerEmail }})</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="address">
+    {{ location.address.street }} {{ location.address.no }},
+    {{ location.address.city }} {{ location.address.zip }},
+    {{ location.address.country }}
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-flat-button (click)="predictLowStocks()">Predict Stock Availabilities</button>
+  </mat-card-actions>
+</mat-card>
+
+<ng-container *ngIf="lowStockAlert; else showError">
+  <app-low-stock-alert-card
+    [alert]="lowStockAlert">
+  </app-low-stock-alert-card>
+</ng-container>
+
+<ng-template #showError>
+  <mat-card *ngIf="errorMessage" class="error-card">
+    <mat-card-content style="color: red;">
+      {{ errorMessage }}
+    </mat-card-content>
+  </mat-card>
+</ng-template>

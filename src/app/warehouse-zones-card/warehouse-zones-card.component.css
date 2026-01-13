@@ -1,0 +1,32 @@
+.zones-card {
+  padding: 16px;
+}
+
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.zone {
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.zone-name {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.zone-chip {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .zones-grid {
+    grid-template-columns: 1fr;
+  }
+}

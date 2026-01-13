@@ -18,6 +18,7 @@ import {EmployeeResponseDTO} from './models/employee-register-response-dto.model
     MatInputModule,
     MatFormFieldModule,
     MatCardModule,
+    NgIf,
   ],
   templateUrl: './registration-form.component.html',
   styleUrl: './registration-form.component.css',
@@ -26,7 +27,8 @@ export class RegisterFormComponent {
   registerForm: FormGroup;
   loading = false;
   error: string | null = null;
-  registered = false; // <- toggle to show login form after successful registration
+  errorMessage: string = "";
+  registered = false;
 
   constructor(private fb: FormBuilder, private registrationService: RegistrationService) {
     this.registerForm = this.fb.group({
@@ -41,26 +43,26 @@ export class RegisterFormComponent {
   }
 
   onSubmit() {
-    if (!this.registerForm.valid) {
-      this.registerForm.markAllAsTouched();
-      return;
-    }
-
-    this.loading = true;
     const employee: EmployeeCreateRequestDTO = this.registerForm.value;
 
-    this.registrationService.registerEmployee(employee).subscribe({
-      next: (res: EmployeeResponseDTO) => {
-        console.log('Employee registered:', res);
-        this.registerForm.reset(); // <- reset form fields
-        this.registered = true; // <- show login form
-        this.loading = false;
-      },
-      error: (err: any) => {
-        console.error(err);
-        this.error = err?.error?.message || 'Registration failed';
-        this.loading = false;
-      }
-    });
+    if (this.registerForm.valid) {
+      this.errorMessage = '';
+      this.registrationService.registerEmployee(employee).subscribe({
+        next: (res: EmployeeResponseDTO) => {
+          console.log('Employee registered:', res);
+          this.registerForm.reset(); // <- reset form fields
+          this.registered = true; // <- show login form
+          this.loading = false;
+        },
+        error: (err: any) => {
+          console.error(err);
+          this.error = err?.error?.message || 'Registration failed';
+          this.loading = false;
+        }
+      });
+    } else {
+      this.registerForm.markAllAsTouched();
+      this.errorMessage = 'Invalid register data';
+    }
   }
 }

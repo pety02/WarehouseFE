@@ -1,0 +1,19 @@
+<div class="user-info" [matMenuTriggerFor]="userMenu">
+  <span class="user-name">
+    {{ user?.fullName ?? '' }}
+  </span>
+</div>
+
+<mat-menu #userMenu="matMenu">
+  <button mat-menu-item>
+    My Profile
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item *ngIf="authService.getUser()?.isAdmin">
+    Change Location
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="authService.logout()">
+    Logout
+  </button>
+</mat-menu>

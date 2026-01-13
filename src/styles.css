@@ -26,3 +26,12 @@
 .cdk-overlay-container .mat-tooltip-show {
   transform: scale(1);
 }
+
+.error-message {
+  color: red;
+  margin: 10px;
+}
+
+:root {
+  --primary-color: #3f51b5; // replace with your Material primary color
+}

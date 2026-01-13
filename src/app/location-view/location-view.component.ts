@@ -12,7 +12,6 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import {AuthService} from '../login-form/login-form.service';
 import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
-import {UserDropDownButtonComponent} from '../user-drop-down-button/user-drop-down-button.component';
 import {WarehouseZonesCardComponent} from '../warehouse-zones-card/warehouse-zones-card.component';
 import {EmployeeChipsComponent} from '../employee-chips/employee-chips.component';
 import {StockCardsComponent} from '../stock-cards/stock-cards.component';
@@ -29,7 +28,6 @@ import {LocationCardComponent} from '../location-card/location-card.component';
     MatIconModule,
     MatButtonModule,
     NavigationBarComponent,
-    UserDropDownButtonComponent,
     WarehouseZonesCardComponent,
     EmployeeChipsComponent,
     StockCardsComponent,
@@ -57,6 +55,7 @@ export class LocationViewComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     this.user = this.authService.getUser()?.fullName ?? '';
+
   }
 
   fetchLocationDetails() {

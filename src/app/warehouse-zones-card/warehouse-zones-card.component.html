@@ -1,0 +1,8 @@
+<mat-card *ngIf="warehouseZones.length" class="zones-card">
+  <div class="zones-grid">
+    <div *ngFor="let zone of warehouseZones" class="zone">
+      <div class="zone-name">{{ zone.name }}</div>
+      <mat-chip class="zone-chip">{{ zone.storageTypeName }}</mat-chip>
+    </div>
+  </div>
+</mat-card>

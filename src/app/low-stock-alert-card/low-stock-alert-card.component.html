@@ -1,0 +1,86 @@
+<mat-card class="low-stock-alert-card">
+  <!-- Header -->
+  <mat-card-header>
+    <mat-card-title>
+      Low Stock Alert
+    </mat-card-title>
+    <mat-card-subtitle>
+      {{ alert.alertDate }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <!-- Message -->
+  <mat-card-content>
+    <p class="alert-message">
+      {{ alert.message }}
+    </p>
+
+    <!-- Stock Counts -->
+    <div class="counts">
+      <div>
+        <span class="label">Actual</span>
+        <span class="value">{{ alert.actualCount }}</span>
+      </div>
+
+      <div>
+        <span class="label">Required</span>
+        <span class="value">{{ alert.neededCount }}</span>
+      </div>
+    </div>
+
+    <!-- Recommendations -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Recommendations
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{ alert.recommendations }}</p>
+    </mat-expansion-panel>
+
+    <!-- Stock Availability -->
+    <section class="stock-availability">
+      <h3>Stock Availability</h3>
+
+      <mat-list>
+        <mat-list-item>
+          <strong>Item:</strong>&nbsp;{{ alert.stockAvailability.item }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <strong>Warehouse Zone:</strong>&nbsp;{{ alert.stockAvailability.warehouseZone }}
+        </mat-list-item>
+
+        <mat-list-item>
+          <strong>Pieces Count:</strong>&nbsp;{{ alert.stockAvailability.piecesCount }}
+        </mat-list-item>
+      </mat-list>
+    </section>
+
+    <!-- Employees -->
+    <section *ngIf="alert.employees?.length">
+      <h3>Assigned Employees</h3>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let employee of alert.employees">
+          {{ employee }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </section>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <!-- Footer -->
+  <mat-card-footer>
+    <div class="meta">
+      <span>Created by {{ alert.createdBy }}</span>
+      <span>{{ alert.createdAt }}</span>
+    </div>
+    <div class="meta">
+      <span>Updated by {{ alert.updatedBy }}</span>
+      <span>{{ alert.updatedAt }}</span>
+    </div>
+  </mat-card-footer>
+</mat-card>

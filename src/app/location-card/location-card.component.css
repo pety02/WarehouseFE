@@ -1,0 +1,13 @@
+.example-card,
+.section-card {
+  width: 400px;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}

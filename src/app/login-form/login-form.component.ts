@@ -58,6 +58,7 @@ export class LoginFormComponent {
     } else {
       // Highlight all invalid fields
       this.loginForm.markAllAsTouched();
+      this.errorMessage = 'Invalid credentials'
     }
   }
 }

@@ -1,0 +1,9 @@
+<mat-grid-list cols="3" rowHeight="180px" gutterSize="16px">
+  <mat-grid-tile *ngFor="let s of stockAvailabilities">
+    <mat-card class="stock-card">
+      <div class="stock-item">{{ s.item }}</div>
+      <mat-chip class="secondary">{{ s.warehouseZone }}</mat-chip>
+      <div class="stock-count">{{ s.piecesCount }} pcs</div>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

@@ -1,0 +1,10 @@
+.nav-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.active-tab {
+  background-color: coral;
+}

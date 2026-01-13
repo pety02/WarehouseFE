@@ -1,0 +1,32 @@
+<div class="nav-buttons">
+  <button mat-button routerLink="/overview" [ngClass]="{'active-tab': isOverviewActive()}"> Overview </button>
+    <button mat-button routerLink="/stocks">Item Stocks</button>
+  <div matTooltip="Under construction" matTooltipPosition="below">
+    <button mat-button [disabled]="true">
+      <mat-chip>
+        Locations
+      </mat-chip>
+    </button>
+  </div>
+  <div matTooltip="Under construction" matTooltipPosition="below">
+    <button mat-button [disabled]="true">
+      <mat-chip>
+        Events Log
+      </mat-chip>
+    </button>
+  </div>
+    <button mat-button routerLink="/internal-transfers">Internal Transfers</button>
+    <app-user-drop-down-button></app-user-drop-down-button>
+
+    <ng-container *ngIf="authService.getUser()?.isAdmin">
+      <button mat-button routerLink="/employees">Employees Dashboard</button>
+      <button mat-button routerLink="/stock-alerts">Stock Alerts</button>
+
+      <!-- Change location dropdown -->
+      <mat-menu #locationMenu="matMenu">
+        <button mat-menu-item *ngFor="let loc of allLocations" (click)="changeLocation(loc)">
+          {{ loc.name }}
+        </button>
+      </mat-menu>
+    </ng-container>
+</div>

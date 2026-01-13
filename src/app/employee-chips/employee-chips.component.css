@@ -1,0 +1,5 @@
+.employees-chips mat-chip {
+  margin: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
