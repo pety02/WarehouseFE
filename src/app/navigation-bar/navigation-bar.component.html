@@ -31,13 +31,13 @@
       </button>
     </div>
 
-    <button *ngIf="isInternalTransfersActive(); else unactiveInternalTransfers" mat-flat-button
-            routerLink="/internal-transfers">
+    <button
+      mat-button
+      routerLink="/transfers"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }">
       Internal Transfers
     </button>
-    <ng-template #unactiveInternalTransfers>
-      <button mat-button routerLink="/internal-transfers"> Internal Transfers</button>
-    </ng-template>
 
     <app-user-drop-down-button></app-user-drop-down-button>
 

@@ -4,6 +4,7 @@ import {LocationViewComponent} from './location-view/location-view.component';
 import {LoginFormComponent} from './login-form/login-form.component';
 import {AllItemsViewComponent} from './all-items-view/all-items-view.component';
 import {EmployeeFullViewComponent} from './employee-full-view/employee-full-view.component';
+import {AllTransfersViewComponent} from './all-transfers-view/all-transfers-view.component';
 
 export const routes: Routes = [
   { path: '', component: AuthTabsViewComponent},
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'overview', component: LocationViewComponent},
   { path: 'item-stocks', component: AllItemsViewComponent },
   { path: 'profile', component: EmployeeFullViewComponent },
+  { path: 'transfers', component: AllTransfersViewComponent },
 ];
 
 /*
