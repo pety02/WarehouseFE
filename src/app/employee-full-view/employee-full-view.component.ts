@@ -11,7 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import EmployeesService from './employee.service';
+import { EmployeeUpdateRequestDTO } from './models/employee-update-request.model';
+import EmployeeService from './employee.service';
 
 @Component({
   selector: 'app-employee-full-view',
@@ -36,9 +37,10 @@ export class EmployeeFullViewComponent implements OnInit {
   employee!: EmployeeResponseDTO;
   editing = false;
   loading = false;
+  updateErrorMessage: string | null = null;
 
   constructor(
-    private employeesService: EmployeesService,
+    private employeesService: EmployeeService,
     private fb: FormBuilder,
     private router: Router
   ) {}
@@ -50,18 +52,13 @@ export class EmployeeFullViewComponent implements OnInit {
 
   private initForm(): void {
     this.profileForm = this.fb.group({
-      fireDate: [null, Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/^(0[0-9]{9}|\+359[0-9]{9})$/)]],
-      role: ['', Validators.required],
-      locationName: ['', Validators.required],
-      locationAddress: this.fb.group({
-        street: ['', Validators.required],
-        city: ['', Validators.required],
-        zip: ['', Validators.required],
-        country: ['', Validators.required],
-      })
+      phoneNumber: [
+        '',
+        [Validators.required, Validators.pattern(/^(0[0-9]{9}|\+359[0-9]{9})$/)]
+      ],
+      fireDate: [null],
+      password: ['', [Validators.minLength(8)]]
     });
   }
 
@@ -70,53 +67,50 @@ export class EmployeeFullViewComponent implements OnInit {
     if (!userData) return;
 
     const employeeLogin = JSON.parse(userData);
+
     this.employeesService.getEmployeeById(employeeLogin.id).subscribe({
       next: emp => {
         this.employee = emp;
-        // patch all fields including nested locationAddress
+
         this.profileForm.patchValue({
-          fireDate: emp.fireDate ? new Date(emp.fireDate) : null,
           email: emp.email,
           phoneNumber: emp.phoneNumber,
-          role: emp.role,
-          locationName: emp.locationName,
-          locationAddress: {
-            street: emp.locationAddress?.street || '',
-            city: emp.locationAddress?.city || '',
-            zip: emp.locationAddress?.zip || '',
-            country: emp.locationAddress?.country || ''
-          }
+          fireDate: emp.fireDate ? new Date(emp.fireDate) : null,
+          password: ''
         });
       },
       error: err => console.error(err)
     });
   }
 
-  toggleEdit() {
+  toggleEdit(): void {
+    this.updateErrorMessage = null;
     this.editing = true;
   }
 
-  cancelEdit() {
+  cancelEdit(): void {
     this.editing = false;
+    this.updateErrorMessage = null;
     this.loadCurrentUser();
   }
 
-  saveProfile() {
-    if (this.profileForm.invalid) return;
+  saveProfile(): void {
+    if (this.profileForm.invalid || !this.employee) return;
 
     this.loading = true;
+    this.updateErrorMessage = null;
 
-    const formValue = this.profileForm.value;
+    const { email, phoneNumber, fireDate, password } = this.profileForm.value;
 
-    // convert fireDate to ISO string if it's a Date
-    const fireDateIso = formValue.fireDate instanceof Date
-      ? formValue.fireDate.toISOString().split('T')[0]
-      : formValue.fireDate;
-
-    const payload = {
-      ...formValue,
-      fireDate: fireDateIso
+    const payload: EmployeeUpdateRequestDTO = {
+      email,
+      password,
+      phoneNumber
     };
+
+    if (password && password.trim().length > 0) {
+      payload.password = password;
+    }
 
     this.employeesService.updateEmployee(this.employee.id, payload).subscribe({
       next: updatedEmployee => {
@@ -126,12 +120,13 @@ export class EmployeeFullViewComponent implements OnInit {
       },
       error: err => {
         console.error(err);
+        this.updateErrorMessage = 'Failed to update profile. Please try again.';
         this.loading = false;
       }
     });
   }
 
-  deleteProfile() {
+  deleteProfile(): void {
     if (!confirm('Are you sure you want to delete your profile?')) return;
 
     this.employeesService.deleteEmployee(this.employee.id).subscribe({

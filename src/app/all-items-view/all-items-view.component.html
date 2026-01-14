@@ -1,0 +1,123 @@
+<app-navigation-bar></app-navigation-bar>
+
+<div class="items-container" *ngIf="dataSource.data.length > 0; else noItems">
+  <button mat-flat-button color="primary"> Add Item </button>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 items-table">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let item">
+        {{ item.id }}
+      </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let item">
+        <ng-container *ngIf="isEditing(item); else readName">
+          <mat-form-field appearance="outline" class="editable-field">
+            <input matInput [(ngModel)]="item.name">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readName>{{ item.name }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Barcode Column -->
+    <ng-container matColumnDef="barcode">
+      <th mat-header-cell *matHeaderCellDef> Barcode </th>
+      <td mat-cell *matCellDef="let item">
+        <ng-container *ngIf="isEditing(item); else readBarcode">
+          <mat-form-field appearance="outline" class="editable-field">
+            <input matInput [(ngModel)]="item.barcodeValue">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readBarcode>{{ item.barcodeValue }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Expiration Column -->
+    <ng-container matColumnDef="expiration">
+      <th mat-header-cell *matHeaderCellDef> Expiration </th>
+      <td mat-cell *matCellDef="let item">
+        <ng-container *ngIf="isEditing(item); else readExpiration">
+          <mat-form-field appearance="outline" class="editable-field">
+            <input matInput type="date" [(ngModel)]="item.expirationDateTime">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readExpiration>
+          {{ item.expirationDateTime | date:'mediumDate' }}
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let item">
+        <ng-container *ngIf="isEditing(item); else readPrice">
+          <mat-form-field appearance="outline" class="editable-field">
+            <input matInput type="number" [(ngModel)]="item.sellingPrice">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readPrice>{{ item.sellingPrice | currency }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Type Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let item">
+        <ng-container *ngIf="isEditing(item); else readType">
+          <mat-form-field appearance="outline" class="editable-field">
+            <input matInput [(ngModel)]="item.itemType">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readType>{{ item.itemType }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let item">
+        <button mat-icon-button color="primary"
+                *ngIf="!isEditing(item)" (click)="editItem(item)">
+          <img src="/edit.ico" alt="Edit"/>
+        </button>
+
+        <button mat-icon-button color="warn"
+                *ngIf="!isEditing(item)" (click)="deleteItem(item)">
+          <img src="/delete.ico" alt="Delete"/>
+        </button>
+
+        <!-- Save / Cancel buttons -->
+        <ng-container *ngIf="isEditing(item)">
+          <button mat-icon-button color="primary" (click)="saveItem(item)">
+            <img src="/save.ico" alt="Save"/>
+          </button>
+          <button mat-icon-button color="accent" (click)="cancelEdit()">
+            <img src="/cancel.ico" alt="Cancel"/>
+          </button>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</div>
+
+<ng-template #noItems>
+  <p style="color: red;">No items found for this location.</p>
+</ng-template>
+
+<!-- DELETE ERROR MESSAGE -->
+<div *ngIf="deleteErrorMessage" class="error-message">
+  {{ deleteErrorMessage }}
+</div>

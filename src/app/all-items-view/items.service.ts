@@ -18,7 +18,7 @@ export class ItemsService {
 
   updateItem(locationId: string, item: ItemDTO): Observable<ItemDTO> {
     // Assuming your backend exposes a PUT endpoint at /api/items/:id
-    return this.http.put<ItemDTO>(`${this.baseUrl}/${locationId}/items/${item.id}`, item);
+    return this.http.put<ItemDTO>(`/api/items/${item.id}`, item);
   }
 
   deleteItem(locationId: string, itemId: string): Observable<void> {
