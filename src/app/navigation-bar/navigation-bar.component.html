@@ -1,3 +1,7 @@
+<mat-toolbar class="app-toolbar">
+  <span class="app-title"> Warehouse Manager FE </span>
+
+  <span class="spacer"></span>
 <div class="nav-buttons">
   <button *ngIf="isOverviewActive(); else unactiveOverview" mat-flat-button routerLink="/overview">
     Overview
@@ -46,3 +50,5 @@
     </mat-menu>
   </ng-container>
 </div>
+  <span class="spacer"></span>
+</mat-toolbar>

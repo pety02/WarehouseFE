@@ -8,6 +8,7 @@ import {AuthService} from '../login-form/login-form.service';
 import {UserDropDownButtonComponent} from '../user-drop-down-button/user-drop-down-button.component';
 import {filter} from 'rxjs';
 import {MatTooltip} from '@angular/material/tooltip';
+import {MatToolbar} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -22,6 +23,7 @@ import {MatTooltip} from '@angular/material/tooltip';
     UserDropDownButtonComponent,
     NgClass,
     MatTooltip,
+    MatToolbar,
   ],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.css'
@@ -52,7 +54,6 @@ export class NavigationBarComponent implements OnInit {
     return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId'));
   }
 
-  // TODO: do the same for other navigation-buttons and their paths
   isItemStocksActive() {
     return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId') + "/item-stocks");
   }

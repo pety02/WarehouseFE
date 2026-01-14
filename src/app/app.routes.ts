@@ -2,11 +2,13 @@ import {Routes} from '@angular/router';
 import {AuthTabsViewComponent} from './auth-tabs-view/auth-tabs-view.component';
 import {LocationViewComponent} from './location-view/location-view.component';
 import {LoginFormComponent} from './login-form/login-form.component';
+import {AllItemsViewComponent} from './all-items-view/all-items-view.component';
 
 export const routes: Routes = [
   { path: '', component: AuthTabsViewComponent},
   { path: 'login', component: AuthTabsViewComponent },
-  { path: 'current-location/:id', component: LocationViewComponent },
+  { path: 'overview', component: LocationViewComponent},
+  { path: 'item-stocks', component: AllItemsViewComponent },
 ];
 
 /*
