@@ -25,5 +25,5 @@
 
 .active-tab {
   background-color: #c2185b;
-  color: white;
+  color: white !important;
 }

@@ -3,12 +3,14 @@ import {AuthTabsViewComponent} from './auth-tabs-view/auth-tabs-view.component';
 import {LocationViewComponent} from './location-view/location-view.component';
 import {LoginFormComponent} from './login-form/login-form.component';
 import {AllItemsViewComponent} from './all-items-view/all-items-view.component';
+import {EmployeeFullViewComponent} from './employee-full-view/employee-full-view.component';
 
 export const routes: Routes = [
   { path: '', component: AuthTabsViewComponent},
   { path: 'login', component: AuthTabsViewComponent },
   { path: 'overview', component: LocationViewComponent},
   { path: 'item-stocks', component: AllItemsViewComponent },
+  { path: 'profile', component: EmployeeFullViewComponent },
 ];
 
 /*

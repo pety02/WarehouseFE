@@ -5,6 +5,7 @@ import {NgIf} from '@angular/common';
 import {AuthService} from '../login-form/login-form.service';
 import {EmployeeLoginResponseDTO} from '../login-form/models/employee-login-response-dto.model';
 import {MatButton} from '@angular/material/button';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-drop-down-button',
@@ -24,10 +25,14 @@ export class UserDropDownButtonComponent implements OnInit {
 
   user: EmployeeLoginResponseDTO | null = null;
 
-  constructor(protected authService: AuthService) {
+  constructor(protected authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
+  }
+
+  protected openMyProfile() {
+    this.router.navigate(["/profile"]);
   }
 }

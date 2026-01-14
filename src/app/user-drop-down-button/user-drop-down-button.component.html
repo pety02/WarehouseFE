@@ -7,7 +7,7 @@
 
 <!-- User dropdown menu -->
 <mat-menu #userMenu="matMenu" class="user-drop-down-menu-content">
-  <button mat-menu-item>
+  <button mat-menu-item (click)="openMyProfile()">
     My Profile
   </button>
   <mat-divider></mat-divider>

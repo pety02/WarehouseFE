@@ -1,7 +1,7 @@
 import {Component, NgIterable, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatMenu, MatMenuItem} from "@angular/material/menu";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NavigationEnd, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {Location} from '../location-view/models/location.model';
 import {AuthService} from '../login-form/login-form.service';
@@ -21,7 +21,6 @@ import {MatToolbar} from '@angular/material/toolbar';
     RouterLink,
     NgIf,
     UserDropDownButtonComponent,
-    NgClass,
     MatTooltip,
     MatToolbar,
     RouterLinkActive,
