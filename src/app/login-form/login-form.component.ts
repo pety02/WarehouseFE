@@ -41,7 +41,7 @@ export class LoginFormComponent {
         next: (user) => {
           console.log('Login successful', user);
           // Navigate to user-specific location page
-          this.router.navigate(['/current-location', user.locationId]);
+          this.router.navigate(['overview']);
         },
         error: (err) => {
           console.error('Login failed:', err);

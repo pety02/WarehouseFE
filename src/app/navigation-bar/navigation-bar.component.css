@@ -22,3 +22,8 @@
   align-items: center;
   gap: 10px;
 }
+
+.active-tab {
+  background-color: #c2185b;
+  color: white;
+}

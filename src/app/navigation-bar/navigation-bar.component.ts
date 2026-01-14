@@ -2,7 +2,7 @@ import {Component, NgIterable, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatMenu, MatMenuItem} from "@angular/material/menu";
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {NavigationEnd, Router, RouterLink} from "@angular/router";
+import {NavigationEnd, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {Location} from '../location-view/models/location.model';
 import {AuthService} from '../login-form/login-form.service';
 import {UserDropDownButtonComponent} from '../user-drop-down-button/user-drop-down-button.component';
@@ -24,6 +24,7 @@ import {MatToolbar} from '@angular/material/toolbar';
     NgClass,
     MatTooltip,
     MatToolbar,
+    RouterLinkActive,
   ],
   templateUrl: './navigation-bar.component.html',
   styleUrl: './navigation-bar.component.css'

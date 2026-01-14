@@ -50,19 +50,16 @@ export class LocationViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.locationId = this.route.snapshot.paramMap.get('id')!;
-    this.fetchLocationDetails();
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+    this.locationId = this.authService.getUser()?.locationId!;
+    this.fetchLocationDetails(this.locationId);
     this.user = this.authService.getUser()?.fullName ?? '';
-
   }
 
-  fetchLocationDetails() {
-    this.locationService.getLocationById(this.locationId).subscribe(loc => this.location = loc);
-    this.locationService.getEmployeesByLocation(this.locationId).subscribe(emp => this.employees = emp);
-    //this.locationService.getItemsByLocation(this.locationId).subscribe(it => this.items = it);
-    this.locationService.getWarehouseZonesByLocation(this.locationId).subscribe(zones => this.warehouseZones = zones);
-    this.locationService.getStockAvailabilitiesByLocation(this.locationId).subscribe(stock => this.stockAvailabilities = stock);
+  fetchLocationDetails(locationId: string) {
+    this.locationService.getLocationById(locationId).subscribe(loc => this.location = loc);
+    this.locationService.getEmployeesByLocation(locationId).subscribe(emp => this.employees = emp);
+    //this.locationService.getItemsByLocation(locationId).subscribe(it => this.items = it);
+    this.locationService.getWarehouseZonesByLocation(locationId).subscribe(zones => this.warehouseZones = zones);
+    this.locationService.getStockAvailabilitiesByLocation(locationId).subscribe(stock => this.stockAvailabilities = stock);
   }
 }

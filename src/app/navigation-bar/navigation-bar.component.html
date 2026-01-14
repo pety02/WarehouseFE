@@ -2,53 +2,56 @@
   <span class="app-title"> Warehouse Manager FE </span>
 
   <span class="spacer"></span>
-<div class="nav-buttons">
-  <button *ngIf="isOverviewActive(); else unactiveOverview" mat-flat-button routerLink="/overview">
-    Overview
-  </button>
-  <ng-template #unactiveOverview>
-    <button mat-button routerLink="/overview"> Overview </button>
-  </ng-template>
+  <div class="nav-buttons">
+    <button
+      mat-button
+      routerLink="/overview"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Overview
+    </button>
 
-  <button *ngIf="isItemStocksActive(); else unactiveItemStocks" mat-flat-button routerLink="/item-stocks">
-    Item Stocks
-  </button>
-  <ng-template #unactiveItemStocks>
-    <button mat-button routerLink="/item-stocks"> Item Stocks </button>
-  </ng-template>
+    <button
+      mat-button
+      routerLink="/item-stocks"
+      routerLinkActive="active-tab"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Item Stocks
+    </button>
 
-  <div matTooltip="Under construction" matTooltipPosition="below">
-    <button mat-button [disabled]="true">
+    <div matTooltip="Under construction" matTooltipPosition="below">
+      <button mat-button [disabled]="true">
         Locations
-    </button>
-  </div>
-
-  <div matTooltip="Under construction" matTooltipPosition="below">
-    <button mat-button [disabled]="true">
-        Events Log
-    </button>
-  </div>
-
-  <button *ngIf="isInternalTransfersActive(); else unactiveInternalTransfers" mat-flat-button routerLink="/internal-transfers">
-    Internal Transfers
-  </button>
-  <ng-template #unactiveInternalTransfers>
-    <button mat-button routerLink="/internal-transfers"> Internal Transfers </button>
-  </ng-template>
-
-  <app-user-drop-down-button></app-user-drop-down-button>
-
-  <ng-container *ngIf="authService.getUser()?.isAdmin">
-    <button mat-button routerLink="/employees">Employees Dashboard</button>
-    <button mat-button routerLink="/stock-alerts">Stock Alerts</button>
-
-    <!-- Change location dropdown -->
-    <mat-menu #locationMenu="matMenu">
-      <button mat-menu-item *ngFor="let loc of allLocations" (click)="changeLocation(loc)">
-        {{ loc.name }}
       </button>
-    </mat-menu>
-  </ng-container>
-</div>
+    </div>
+
+    <div matTooltip="Under construction" matTooltipPosition="below">
+      <button mat-button [disabled]="true">
+        Events Log
+      </button>
+    </div>
+
+    <button *ngIf="isInternalTransfersActive(); else unactiveInternalTransfers" mat-flat-button
+            routerLink="/internal-transfers">
+      Internal Transfers
+    </button>
+    <ng-template #unactiveInternalTransfers>
+      <button mat-button routerLink="/internal-transfers"> Internal Transfers</button>
+    </ng-template>
+
+    <app-user-drop-down-button></app-user-drop-down-button>
+
+    <ng-container *ngIf="authService.getUser()?.isAdmin">
+      <button mat-button routerLink="/employees">Employees Dashboard</button>
+      <button mat-button routerLink="/stock-alerts">Stock Alerts</button>
+
+      <!-- Change location dropdown -->
+      <mat-menu #locationMenu="matMenu">
+        <button mat-menu-item *ngFor="let loc of allLocations" (click)="changeLocation(loc)">
+          {{ loc.name }}
+        </button>
+      </mat-menu>
+    </ng-container>
+  </div>
   <span class="spacer"></span>
 </mat-toolbar>
