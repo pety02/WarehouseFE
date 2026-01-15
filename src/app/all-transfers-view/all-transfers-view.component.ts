@@ -97,10 +97,10 @@ export class AllTransfersViewComponent implements OnInit {
         this.dataSource.data = this.dataSource.data.filter(t => t.id !== transfer.id);
       },
       error: err => {
-        if (err.status === 404) {
-          this.deleteErrorMessage = 'Transfer not found or already deleted';
-        } else if (err.status === 409) {
+        if (err.status === 400) {
           this.deleteErrorMessage = 'Cannot delete transfer: it has associated items';
+        } else if (err.status === 404) {
+          this.deleteErrorMessage = 'Transfer not found or already deleted';
         } else if (err.status === 500) {
           this.deleteErrorMessage = 'Server error while deleting transfer';
         } else {
