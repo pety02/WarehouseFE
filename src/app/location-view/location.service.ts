@@ -15,6 +15,10 @@ export class LocationService {
 
   constructor(private http: HttpClient) {}
 
+  getAllLocations(): Observable<Location[]> {
+    return this.http.get<Location[]>(this.baseUrl);
+  }
+
   getLocationById(id: string): Observable<Location> {
     return this.http.get<Location>(`${this.baseUrl}/${id}`);
   }

@@ -44,13 +44,6 @@
     <ng-container *ngIf="authService.getUser()?.isAdmin">
       <button mat-button routerLink="/employees">Employees Dashboard</button>
       <button mat-button routerLink="/stock-alerts">Stock Alerts</button>
-
-      <!-- Change location dropdown -->
-      <mat-menu #locationMenu="matMenu">
-        <button mat-menu-item *ngFor="let loc of allLocations" (click)="changeLocation(loc)">
-          {{ loc.name }}
-        </button>
-      </mat-menu>
     </ng-container>
   </div>
   <span class="spacer"></span>

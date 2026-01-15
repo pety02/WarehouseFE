@@ -8,7 +8,7 @@ import {
   MatCardTitle
 } from "@angular/material/card";
 import {MatChip, MatChipsModule} from "@angular/material/chips";
-import {MatGridList, MatGridListModule, MatGridTile} from "@angular/material/grid-list";
+import {MatGridListModule} from "@angular/material/grid-list";
 import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
 import {Item} from './models/item.model';
 
@@ -18,8 +18,6 @@ import {Item} from './models/item.model';
   imports: [
     MatCard,
     MatChip,
-    MatGridList,
-    MatGridTile,
     NgForOf,
     MatCardHeader,
     MatCardTitle,
