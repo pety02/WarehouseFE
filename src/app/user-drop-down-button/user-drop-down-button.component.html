@@ -11,7 +11,7 @@
     My Profile
   </button>
   <mat-divider></mat-divider>
-  <button mat-menu-item *ngIf="authService.getUser()?.isAdmin">
+  <button mat-menu-item (click)="openLocationDialog()">
     Change Location
   </button>
   <mat-divider></mat-divider>

@@ -1,8 +1,19 @@
 <mat-card *ngIf="warehouseZones.length" class="zones-card">
-  <div class="zones-grid">
-    <div *ngFor="let zone of warehouseZones" class="zone">
-      <div class="zone-name">{{ zone.name }}</div>
-      <mat-chip class="zone-chip">{{ zone.storageTypeName }}</mat-chip>
+  <mat-card-header>
+    <mat-card-title>Warehouse Zones</mat-card-title>
+    <mat-card-subtitle>
+      {{ warehouseZones.length }} zones available
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="zones-grid">
+      <div *ngFor="let zone of warehouseZones" class="zone">
+        <div class="zone-name">{{ zone.name }}</div>
+        <mat-chip class="zone-chip" selected>
+          {{ zone.storageTypeName }}
+        </mat-chip>
+      </div>
     </div>
-  </div>
+  </mat-card-content>
 </mat-card>

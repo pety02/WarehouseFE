@@ -1,0 +1,73 @@
+<app-navigation-bar></app-navigation-bar>
+
+<div class="items-container" *ngIf="this.dataSource.data.length > 0; else noTransfers">
+  <button mat-flat-button color="primary"> Add Transfer </button>
+
+  <table mat-table [dataSource]="this.dataSource" class="mat-elevation-z8 items-table">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let transfer"> {{ transfer.id }} </td>
+    </ng-container>
+
+    <!-- Delivery Date Column -->
+    <ng-container matColumnDef="deliveryDateTime">
+      <th mat-header-cell *matHeaderCellDef> Delivery Date </th>
+      <td mat-cell *matCellDef="let transfer">
+        <ng-container *ngIf="this.isEditing(transfer); else readDate">
+          <mat-form-field appearance="outline">
+            <input matInput type="datetime-local" [(ngModel)]="transfer.deliveryDateTime">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readDate>{{ transfer.deliveryDateTime | date:'medium' }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Source Location Column -->
+    <ng-container matColumnDef="sourceLocationName">
+      <th mat-header-cell *matHeaderCellDef> Source </th>
+      <td mat-cell *matCellDef="let transfer"> {{ transfer.sourceLocationName }} </td>
+    </ng-container>
+
+    <!-- Destination Location Column -->
+    <ng-container matColumnDef="destinationLocationName">
+      <th mat-header-cell *matHeaderCellDef> Destination </th>
+      <td mat-cell *matCellDef="let transfer"> {{ transfer.destinationLocationName }} </td>
+    </ng-container>
+
+    <!-- Remarks Column -->
+    <ng-container matColumnDef="remarks">
+      <th mat-header-cell *matHeaderCellDef> Remarks </th>
+      <td mat-cell *matCellDef="let transfer">
+        <ng-container *ngIf="this.isEditing(transfer); else readRemarks">
+          <mat-form-field appearance="outline">
+            <input matInput [(ngModel)]="transfer.remarks">
+          </mat-form-field>
+        </ng-container>
+        <ng-template #readRemarks>{{ transfer.remarks }}</ng-template>
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let transfer">
+        <button mat-icon-button color="warn" *ngIf="!this.isEditing(transfer)" (click)="this.deleteTransfer(transfer)">
+          <img src="/delete.ico" alt="Delete"/>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="this.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: this.displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #noTransfers>
+  <p style="color: red;">No transfers found.</p>
+</ng-template>
+
+<div *ngIf="this.deleteErrorMessage" class="error-message">
+  {{ this.deleteErrorMessage }}
+</div>

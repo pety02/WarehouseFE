@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Select a Warehouse Location</h2>
+
+<mat-dialog-content>
+  <mat-form-field appearance="fill" style="width: 100%;">
+    <mat-label>Choose location</mat-label>
+    <mat-select [(value)]="selectedLocationId">
+      <mat-option *ngFor="let loc of data.allLocations" [value]="loc.id">
+        {{ loc.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="!selectedLocationId" (click)="confirm()">
+    Go
+  </button>
+</mat-dialog-actions>

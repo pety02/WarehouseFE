@@ -1,9 +1,8 @@
-import {Component, NgIterable, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatMenu, MatMenuItem} from "@angular/material/menu";
 import {NgForOf, NgIf} from "@angular/common";
 import {NavigationEnd, Router, RouterLink, RouterLinkActive} from "@angular/router";
-import {Location} from '../location-view/models/location.model';
 import {AuthService} from '../login-form/login-form.service';
 import {UserDropDownButtonComponent} from '../user-drop-down-button/user-drop-down-button.component';
 import {filter} from 'rxjs';
@@ -29,7 +28,6 @@ import {MatToolbar} from '@angular/material/toolbar';
   styleUrl: './navigation-bar.component.css'
 })
 export class NavigationBarComponent implements OnInit {
-  protected allLocations: (NgIterable<Location>) | undefined | null;
   currentUrl: string = "";
 
   constructor(protected authService: AuthService, private router: Router) {}
@@ -44,21 +42,5 @@ export class NavigationBarComponent implements OnInit {
     ).subscribe((event: NavigationEnd) => {
       this.currentUrl = event.urlAfterRedirects;
     });
-  }
-
-  changeLocation(loc: Location) {
-
-  }
-
-  isOverviewActive(): boolean {
-    return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId'));
-  }
-
-  isItemStocksActive() {
-    return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId') + "/item-stocks");
-  }
-
-  isInternalTransfersActive() {
-    return this.currentUrl.startsWith('/current-location/' + localStorage.getItem('locationId') + "/internal-transfers");
   }
 }
