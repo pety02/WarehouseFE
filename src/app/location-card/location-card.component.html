@@ -4,8 +4,7 @@
          alt="Warehouse image"/>
     <mat-card-title>{{ location.name }}</mat-card-title>
     <mat-card-subtitle>
-      Manager: {{ location.managerName }} {{ location.managerSurname }}
-      <span class="manager-email">({{ location.managerEmail }})</span>
+      <app-employee-chips [employees] = "employees"></app-employee-chips>
     </mat-card-subtitle>
   </mat-card-header>
 

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {
     MatCard,
@@ -14,6 +14,10 @@ import {LowStockAlertDTO} from '../location-view/models/LowStockAlertDTO.model';
 import {LowStockAlertCardComponent} from '../low-stock-alert-card/low-stock-alert-card.component';
 import {NgIf} from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
+import {EmployeeChipsComponent} from '../employee-chips/employee-chips.component';
+import {Employee} from '../location-view/models/employee.model';
+import {LocationService} from '../location-view/location.service';
+import {AuthService} from '../login-form/login-form.service';
 
 @Component({
   selector: 'app-location-card',
@@ -28,18 +32,28 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatCardTitle,
     LowStockAlertCardComponent,
     NgIf,
+    EmployeeChipsComponent,
   ],
   templateUrl: './location-card.component.html',
   styleUrl: './location-card.component.css'
 })
-export class LocationCardComponent {
+export class LocationCardComponent implements OnInit {
   lowStockAlert: LowStockAlertDTO | null = null;
+  locationId!: string;
+  employees: Employee[] = [];
   @Input() location!: Location;
   errorMessage: string | null = null;
   loading = false;
 
-  constructor(private lowStockAlertService: LowStockAlertService
+  constructor(private lowStockAlertService: LowStockAlertService,
+              private locationService: LocationService,
+              private authService: AuthService
   ) {}
+
+  ngOnInit() {
+    this.locationId = this.authService.getUser()?.locationId!;
+    this.locationService.getEmployeesByLocation(this.locationId).subscribe(emp => this.employees = emp);
+  }
 
   predictLowStocks(): void {
     this.loading = true;
@@ -61,4 +75,5 @@ export class LocationCardComponent {
       }
     });
   }
+
 }

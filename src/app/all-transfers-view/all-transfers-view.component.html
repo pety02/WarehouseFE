@@ -54,17 +54,17 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let transfer">
         <button mat-icon-button color="primary" *ngIf="!this.isEditing(transfer)" (click)="this.editTransfer(transfer)">
-          <mat-icon>edit</mat-icon>
+          <img src="/edit.ico" alt="Edit"/>
         </button>
         <button mat-icon-button color="warn" *ngIf="!this.isEditing(transfer)" (click)="this.deleteTransfer(transfer)">
-          <mat-icon>delete</mat-icon>
+          <img src="/delete.ico" alt="Delete"/>
         </button>
         <ng-container *ngIf="this.isEditing(transfer)">
           <button mat-icon-button color="primary" (click)="this.saveTransfer(transfer)">
-            <mat-icon>save</mat-icon>
+            <img src="/save.ico" alt="Save"/>
           </button>
           <button mat-icon-button color="accent" (click)="this.cancelEdit()">
-            <mat-icon>cancel</mat-icon>
+            <img src="/cancel.ico" alt="Cancel"/>
           </button>
         </ng-container>
       </td>

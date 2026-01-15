@@ -1,9 +1,53 @@
+.stock-wrapper {
+  padding: 8px;
+}
+
 .stock-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
+  gap: 20px;
 }
 
 .stock-card {
-  padding: 16px;
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stock-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.stock-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stock-item {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.zone-chip {
+  font-size: 12px;
+}
+
+.stock-count {
+  margin-top: 12px;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: right;
+  color: #c2185b;
+}
+
+.unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
 }

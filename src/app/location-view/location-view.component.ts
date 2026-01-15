@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {AuthService} from '../login-form/login-form.service';
 import {NavigationBarComponent} from '../navigation-bar/navigation-bar.component';
 import {WarehouseZonesCardComponent} from '../warehouse-zones-card/warehouse-zones-card.component';
-import {EmployeeChipsComponent} from '../employee-chips/employee-chips.component';
 import {StockCardsComponent} from '../stock-cards/stock-cards.component';
 import {LocationCardComponent} from '../location-card/location-card.component';
 import {ItemStocksComponent} from '../item-stocks/item-stocks.component';
@@ -30,7 +29,6 @@ import {Item} from './models/item.model';
     MatButtonModule,
     NavigationBarComponent,
     WarehouseZonesCardComponent,
-    EmployeeChipsComponent,
     StockCardsComponent,
     LocationCardComponent,
     ItemStocksComponent,
@@ -39,7 +37,6 @@ import {Item} from './models/item.model';
 export class LocationViewComponent implements OnInit {
   locationId!: string;
   location!: Location;
-  employees: Employee[] = [];
   items: Item[] = [];
   warehouseZones: WarehouseZone[] = [];
   stockAvailabilities: StockAvailability[] = [];
@@ -58,7 +55,6 @@ export class LocationViewComponent implements OnInit {
 
   fetchLocationDetails(locationId: string) {
     this.locationService.getLocationById(locationId).subscribe(loc => this.location = loc);
-    this.locationService.getEmployeesByLocation(locationId).subscribe(emp => this.employees = emp);
     this.locationService.getItemsByLocation(locationId).subscribe(it => {
       this.items = it;
       console.log("ITEMS = ", this.items);

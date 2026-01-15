@@ -12,9 +12,12 @@
     <!-- Content -->
     <mat-card-content>
 
-      <div class="info-row">
+      <div class="info-row barcode-row">
         <span class="label">Barcode:</span>
-        <span>{{ item.barcodeValue }}</span>
+          <span class="barcode-content">
+          <img src="/barcode.png" alt="Barcode PNG image" />
+          <span class="barcode-text">{{ item.barcodeValue }}</span>
+        </span>
       </div>
 
       <div class="info-row">

@@ -1,9 +1,26 @@
 <mat-card class="stock-wrapper" *ngIf="stockAvailabilities.length">
-  <div class="stock-grid">
-    <mat-card class="stock-card" *ngFor="let s of stockAvailabilities">
-      <div class="stock-item">{{ s.item }}</div>
-      <mat-chip class="secondary">{{ s.warehouseZone }}</mat-chip>
-      <div class="stock-count">{{ s.piecesCount }} pcs</div>
-    </mat-card>
-  </div>
+  <mat-card-header>
+    <mat-card-title>Stock Availability</mat-card-title>
+    <mat-card-subtitle>
+      {{ stockAvailabilities.length }} items in stock
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="stock-grid">
+      <mat-card class="stock-card" *ngFor="let s of stockAvailabilities">
+
+        <div class="stock-header">
+          <span class="stock-item">{{ s.item }}</span>
+          <mat-chip class="zone-chip">{{ s.warehouseZone }}</mat-chip>
+        </div>
+
+        <div class="stock-count">
+          {{ s.piecesCount }}
+          <span class="unit">pcs</span>
+        </div>
+
+      </mat-card>
+    </div>
+  </mat-card-content>
 </mat-card>

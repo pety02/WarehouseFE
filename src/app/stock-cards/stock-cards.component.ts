@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {MatCard} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle} from "@angular/material/card";
 import {MatChipsModule} from "@angular/material/chips";
 import {NgForOf, NgIf} from "@angular/common";
 import {StockAvailability} from '../location-view/models/stock-availability.model';
@@ -10,7 +10,11 @@ import {StockAvailability} from '../location-view/models/stock-availability.mode
     MatCard,
     MatChipsModule,
     NgForOf,
-    NgIf
+    NgIf,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
+    MatCardContent
   ],
   templateUrl: './stock-cards.component.html',
   styleUrl: './stock-cards.component.css'
