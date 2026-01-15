@@ -1,22 +1,39 @@
-import { Component } from '@angular/core';
-import {MatCard} from "@angular/material/card";
-import {MatChip} from "@angular/material/chips";
-import {MatGridList, MatGridTile} from "@angular/material/grid-list";
-import {NgForOf} from "@angular/common";
-import {StockAvailability} from '../location-view/models/stock-availability.model';
+import {Component, Input} from '@angular/core';
+import {
+  MatCard,
+  MatCardContent,
+  MatCardHeader,
+  MatCardModule,
+  MatCardSubtitle,
+  MatCardTitle
+} from "@angular/material/card";
+import {MatChip, MatChipsModule} from "@angular/material/chips";
+import {MatGridList, MatGridListModule, MatGridTile} from "@angular/material/grid-list";
+import {CurrencyPipe, DatePipe, NgForOf} from "@angular/common";
+import {Item} from './models/item.model';
 
 @Component({
   selector: 'app-item-stocks',
-    imports: [
-        MatCard,
-        MatChip,
-        MatGridList,
-        MatGridTile,
-        NgForOf
-    ],
+  standalone: true,
+  imports: [
+    MatCard,
+    MatChip,
+    MatGridList,
+    MatGridTile,
+    NgForOf,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
+    MatCardContent,
+    MatCardModule,
+    CurrencyPipe,
+    MatGridListModule,
+    MatChipsModule,
+    DatePipe
+  ],
   templateUrl: './item-stocks.component.html',
   styleUrl: './item-stocks.component.css'
 })
 export class ItemStocksComponent {
-    stockAvailabilities: StockAvailability[] = [];
+    @Input() items!: Item[];
 }

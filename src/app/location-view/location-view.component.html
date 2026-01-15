@@ -5,6 +5,7 @@
   <div class="stacked-cards">
     <app-location-card [location]="location"></app-location-card>
     <app-warehouse-zones-card [warehouseZones] = "warehouseZones"></app-warehouse-zones-card>
+    <app-item-stocks *ngIf="items.length > 0" [items]="items"></app-item-stocks>
     <app-employee-chips [employees] = "employees"></app-employee-chips>
     <app-stock-cards [stockAvailabilities]="stockAvailabilities"></app-stock-cards>
   </div>

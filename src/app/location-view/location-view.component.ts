@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Employee} from './models/employee.model';
-import {Item} from './models/item.model';
 import {WarehouseZone} from './models/warehouse-zone.model';
 import {StockAvailability} from './models/stock-availability.model';
 import {Location} from './models/location.model'
@@ -16,6 +15,8 @@ import {WarehouseZonesCardComponent} from '../warehouse-zones-card/warehouse-zon
 import {EmployeeChipsComponent} from '../employee-chips/employee-chips.component';
 import {StockCardsComponent} from '../stock-cards/stock-cards.component';
 import {LocationCardComponent} from '../location-card/location-card.component';
+import {ItemStocksComponent} from '../item-stocks/item-stocks.component';
+import {Item} from './models/item.model';
 
 @Component({
   selector: 'app-location-view',
@@ -32,6 +33,7 @@ import {LocationCardComponent} from '../location-card/location-card.component';
     EmployeeChipsComponent,
     StockCardsComponent,
     LocationCardComponent,
+    ItemStocksComponent,
   ],
 })
 export class LocationViewComponent implements OnInit {
@@ -44,7 +46,6 @@ export class LocationViewComponent implements OnInit {
   user: string | undefined = "";
 
   constructor(
-    private route: ActivatedRoute,
     private locationService: LocationService,
     protected authService: AuthService,
   ) {}
@@ -58,7 +59,10 @@ export class LocationViewComponent implements OnInit {
   fetchLocationDetails(locationId: string) {
     this.locationService.getLocationById(locationId).subscribe(loc => this.location = loc);
     this.locationService.getEmployeesByLocation(locationId).subscribe(emp => this.employees = emp);
-    //this.locationService.getItemsByLocation(locationId).subscribe(it => this.items = it);
+    this.locationService.getItemsByLocation(locationId).subscribe(it => {
+      this.items = it;
+      console.log("ITEMS = ", this.items);
+    });
     this.locationService.getWarehouseZonesByLocation(locationId).subscribe(zones => this.warehouseZones = zones);
     this.locationService.getStockAvailabilitiesByLocation(locationId).subscribe(stock => this.stockAvailabilities = stock);
   }

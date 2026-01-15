@@ -1,9 +1,39 @@
-<mat-grid-list cols="3" rowHeight="180px" gutterSize="16px">
-  <mat-grid-tile *ngFor="let s of stockAvailabilities">
-    <mat-card class="stock-card">
-      <div class="stock-item">{{ s.item }}</div>
-      <mat-chip class="secondary">{{ s.warehouseZone }}</mat-chip>
-      <div class="stock-count">{{ s.piecesCount }} pcs</div>
-    </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+<div class="items-container">
+  <mat-card class="item-card" *ngFor="let item of items">
+
+    <!-- Header -->
+    <mat-card-header>
+      <mat-card-title>{{ item.name }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ item.type?.name }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Content -->
+    <mat-card-content>
+
+      <div class="info-row">
+        <span class="label">Barcode:</span>
+        <span>{{ item.barcodeValue }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Price:</span>
+        <span>{{ item.sellingPrice | currency }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="label">Expires:</span>
+        <span>{{ item.expirationDateTime | date: 'mediumDate' }}</span>
+      </div>
+
+      <div class="chips">
+        <mat-chip *ngFor="let loc of item.locations" color="primary">
+          {{ loc.name }}
+        </mat-chip>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>
